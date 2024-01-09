@@ -2,7 +2,7 @@
 import { Point } from "./index.js";
 
 describe("math", () => {
-  describe("point", () => {
+  it("point", () => {
     const point1 = new Point(1, 3);
     const point2 = new Point(2, 1);
     point1.add(point2);
