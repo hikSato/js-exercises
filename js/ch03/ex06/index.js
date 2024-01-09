@@ -87,25 +87,3 @@ export function trim(str) {
     throw new Error("Error: invalid input");
   return str.replace(/^\s+/, "").replace(/\s+$/, "");
 }
-
-// export function trim(str) {
-// let newStr = "";
-// let start;
-// let end;
-// for (let i = 0; i < str.length; i++) {
-//   if (str[i] !== `\s` && start === undefined) start = i;
-//   if (str[str.length - i] !== `\s` && end === undefined)
-//     end = str.length - 1 - i;
-// }
-// console.log("start: " + start);
-// console.log("end :" + end);
-// if (start === undefined) return "";
-// for (let i = start; i <= end; i++) {
-//   newStr += str[i];
-// }
-//   return str.replace(/^\s+/, "").replace(/\s+$/, "");
-// }
-
-// console.log(trim("   Hello, World  "));
-// console.log(slice("Hello, Worlf!", -100, undefined));
-// console.log(padStart("abc", 10, "123"));
