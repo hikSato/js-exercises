@@ -9,3 +9,6 @@ const r = "\u0072";
 const comma = "\u002C";
 
 console.log([H, e, l, l, o, comma, W, o, r, l, d].join(""));
+
+// console.logとかにも使える。
+// showメッセージも使える。

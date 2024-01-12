@@ -5,3 +5,7 @@
   jquery  
   https://github.com/jquery/jquery
   https://github.com/jquery/jquery/blob/937923d9ee8dfd19008447b5059cbd13ee5a23ac/src/exports/global.js#L8
+
+- Lodash
+- underscoreJs
+- Angular
