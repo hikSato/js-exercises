@@ -7,6 +7,8 @@ describe("math", () => {
     const point2 = new Point(2, 1);
     point1.add(point2);
     expect(point1).toBeInstanceOf(Point);
+    expect(point1.x).toBe(3);
+    expect(point2.y).toBe(4);
     expect(point1.distance()).toBe(5);
   });
 });
