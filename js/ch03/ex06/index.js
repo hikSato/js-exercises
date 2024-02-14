@@ -1,3 +1,6 @@
+// letよりもconstを使う方がわかりやすくてよい。
+// 途中で値が変わるとわかりずらい。
+
 export function substring(str, indexStart, indexEnd) {
   if (!(str instanceof String) && typeof str !== "string")
     throw new Error("Error: invalid input");

@@ -1,12 +1,11 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <body>
     <script>
       const life = { answer: 42 };
+      console.log({ ...life });
+      life.answer = 0;
       console.log(life);
-      const life2 = { ...life };
-      life2.answer = 0;
-      console.log(life2);
     </script>
   </body>
 </html>

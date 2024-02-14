@@ -85,7 +85,7 @@ class Histogram {
 // asynchronously reads chunks of text from standard input, and adds those chunks to
 // the histogram. When it reaches the end of the stream, it returns this histogram
 async function histogramFromStdin() {
-  process.stdin.setEncoding("utf-8") // Read Unicode strings, not bytes
+  process.stdin.setEncoding("shift_jis") // Read Unicode strings, not bytes
   let histogram = new Histogram()
   for await (let chunk of process.stdin) {
     histogram.add(chunk)

@@ -7,5 +7,5 @@ export const lfToCrlf = (str) => {
 export const crlfToLf = (str) => {
   if (!(str instanceof String) && typeof str !== "string")
     throw new Error("Error: invalid input");
-  return str.replaceAll(/\r\n/g, "\n");
+  return str.replace(/\r\n/g, "\n");
 };

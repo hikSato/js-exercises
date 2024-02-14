@@ -81,6 +81,9 @@ test.each([
   trimTestCase("   Hello World!"),
   trimTestCase("Hello World!   "),
   trimTestCase("Hello World!"),
+  trimTestCase("Hello World!"),
+  trimTestCase("Hello World!"),
 ])("trim(%p) => %p", (str, expected) => {
   expect(trim(str)).toBe(expected);
 });
+// スペース文字が大量にあるため、

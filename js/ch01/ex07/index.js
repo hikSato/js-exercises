@@ -24,3 +24,5 @@ export class Point {
     this.#y += point.y;
   }
 }
+
+// 実際には、値は変えない方がよくイミュータブルの方がよい。

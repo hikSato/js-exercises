@@ -12,3 +12,57 @@ for (let i = 0; i < params.length; i++) {
     console.log("========================");
   }
 }
+// ========================
+// Infinity + Infinity = Infinity
+// Infinity - Infinity = NaN
+// Infinity * Infinity = Infinity
+// Infinity / Infinity = NaN
+// ========================
+// ========================
+// Infinity + -Infinity = NaN
+// Infinity - -Infinity = Infinity
+// Infinity * -Infinity = -Infinity
+// Infinity / -Infinity = NaN
+// ========================
+// ========================
+// Infinity + NaN = NaN
+// Infinity - NaN = NaN
+// Infinity * NaN = NaN
+// Infinity / NaN = NaN
+// ========================
+// ========================
+// -Infinity + Infinity = NaN
+// -Infinity - Infinity = -Infinity
+// -Infinity * Infinity = -Infinity
+// -Infinity / Infinity = NaN
+// ========================
+// ========================
+// -Infinity + -Infinity = -Infinity
+// -Infinity - -Infinity = NaN
+// -Infinity * -Infinity = Infinity
+// -Infinity / -Infinity = NaN
+// ========================
+// ========================
+// -Infinity + NaN = NaN
+// -Infinity - NaN = NaN
+// -Infinity * NaN = NaN
+// -Infinity / NaN = NaN
+// ========================
+// ========================
+// NaN + Infinity = NaN
+// NaN - Infinity = NaN
+// NaN * Infinity = NaN
+// NaN / Infinity = NaN
+// ========================
+// ========================
+// NaN + -Infinity = NaN
+// NaN - -Infinity = NaN
+// NaN * -Infinity = NaN
+// NaN / -Infinity = NaN
+// ========================
+// ========================
+// NaN + NaN = NaN
+// NaN - NaN = NaN
+// NaN * NaN = NaN
+// NaN / NaN = NaN
+// ========================
