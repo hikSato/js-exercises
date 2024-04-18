@@ -1,20 +1,31 @@
 import { add, div, mul, sub } from ".";
 
-const complex = (re, im) => {
-  return { realPart: re, imaginaryPart: im };
-};
+class complex {
+  constructor(re, im) {
+    this.realPart = re;
+    this.imaginaryPart = im;
+  }
+}
 
 describe("", () => {
   test("add", () => {
-    expect(add(complex(2, 3), complex(1, 4))).toStrictEqual(complex(3, 7));
+    expect(add(new complex(2, 3), new complex(1, 4))).toStrictEqual(
+      new complex(3, 7)
+    );
   });
   test("sub", () => {
-    expect(sub(complex(2, 3), complex(1, 4))).toStrictEqual(complex(1, -1));
+    expect(sub(new complex(2, 3), new complex(1, 4))).toStrictEqual(
+      new complex(1, -1)
+    );
   });
   test("mul", () => {
-    expect(mul(complex(2, 3), complex(1, 4))).toStrictEqual(complex(-10, 11));
+    expect(mul(new complex(2, 3), new complex(1, 4))).toStrictEqual(
+      new complex(-10, 11)
+    );
   });
   test("div", () => {
-    expect(div(complex(2, 9), complex(1, 2))).toStrictEqual(complex(4, 1));
+    expect(div(new complex(2, 9), new complex(1, 2))).toStrictEqual(
+      new complex(4, 1)
+    );
   });
 });
