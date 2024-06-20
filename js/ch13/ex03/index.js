@@ -1,6 +1,6 @@
 import * as fs from "node:fs";
 
-function readdir(path, options) {
+export function readdir(path, options) {
   return new Promise((resolve, reject) => {
     fs.readdir(path, options, (err, files) => {
       if (err) {
@@ -17,7 +17,7 @@ readdir("./ch13/ex03/A")
   .then(() => readdir("./ch13/ex03/C"))
   .then(() => console.log("COMPLETED"));
 
-function stat(path, options) {
+export function stat(path, options) {
   return new Promise((resolve, reject) => {
     fs.stat(path, options, (err, stats) => {
       if (err) {

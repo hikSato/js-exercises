@@ -1,4 +1,3 @@
-import * as fs from "node:fs";
 import { join } from "node:path";
 import * as fsPromises from "node:fs/promises";
 
@@ -22,7 +21,7 @@ import * as fsPromises from "node:fs/promises";
 //     });
 //   });
 // }
-async function fetchFirstFileSize(path, callback) {
+export async function fetchFirstFileSize(path, callback) {
   try {
     const files = await fsPromises.readdir(path);
     if (files.length === 0) {
@@ -67,7 +66,7 @@ async function fetchFirstFileSize(path, callback) {
 //   });
 // }
 
-async function fetchSumOfFileSizes(path, callback) {
+export async function fetchSumOfFileSizes(path, callback) {
   try {
     const files = await fsPromises.readdir(path);
     let total = 0;
@@ -86,7 +85,3 @@ async function fetchSumOfFileSizes(path, callback) {
     return;
   }
 }
-
-console.log("====");
-// fetchFirstFileSize("./ch13/ex08/", (err, size) => console.log(size));
-fetchSumOfFileSizes("./ch13/ex08/", (err, size) => console.log(size));

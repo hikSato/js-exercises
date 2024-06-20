@@ -1,10 +1,11 @@
-import * as fs from "node:fs";
+// import * as fs from "node:fs";
 import * as fsPromises from "node:fs/promises";
+import { join } from "node:path";
 
-fsPromises
-  .mkdir("A")
-  .then(() => fsPromises.mkdir("B"))
-  .then(() => fsPromises.mkdir("C"));
+// fsPromises
+//   .mkdir("A")
+//   .then(() => fsPromises.mkdir("B"))
+//   .then(() => fsPromises.mkdir("C"));
 
 // function fetchFirstFileSize(path, callback) {
 //   fs.readdir(path, (err, files) => {
@@ -27,7 +28,7 @@ fsPromises
 //   });
 // }
 
-function fetchFirstFileSize(path, callback) {
+export function fetchFirstFileSize(path, callback) {
   return fsPromises
     .readdir(path)
     .then(
@@ -82,31 +83,28 @@ function fetchFirstFileSize(path, callback) {
 //   });
 // }
 
-function fetchSumOfFileSizes(path, callback) {
-  fsPromises
-    .readdir(path)
-    .then((files) => {
-      let total = 0;
-      const rest = [...files];
-      function iter() {
-        if (rest.length === 0) {
-          callback(null, total);
+export function fetchSumOfFileSizes(path, callback) {
+  return fsPromises.readdir(path).then((files) => {
+    let total = 0;
+    const rest = [...files];
+    function iter() {
+      if (rest.length === 0) {
+        callback(null, total);
+        return;
+      }
+
+      const next = rest.pop();
+      return fsPromises.stat(join(path, next)).then(
+        (stats) => {
+          total += stats.size;
+          return iter();
+        },
+        (err) => {
+          callback(err);
           return;
         }
-
-        const next = rest.pop();
-        return fsPromises.stat(join(path, next)).then(
-          (stats) => {
-            total += stats.size;
-            iter();
-          },
-          (err) => {
-            callback(err);
-            return;
-          }
-        );
-      }
-      return Promise.resolve([]).then(iter);
-    })
-    .then();
+      );
+    }
+    return Promise.resolve([]).then(iter);
+  });
 }

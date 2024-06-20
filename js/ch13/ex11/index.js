@@ -1,20 +1,25 @@
-export function retryWithExponentialBackoff(func, maxRetry, callback) {
+export async function retryWithExponentialBackoff(func, maxRetry, callback) {
   let count = 0;
   const second = 1000;
-  const job = () => {
-    const result = func();
+  const job = async () => {
+    const result = await func();
+    console.log(result);
     count++;
-    if (result || count >= maxRetry) {
-      callback(result);
-      return;
+    if (result) {
+      return result;
     }
-    setTimeout(job, 2 ** count * second);
+    if (count >= maxRetry) {
+      throw new Error("error");
+    }
+    new Promise(() => setTimeout(job, 2 ** count * second));
   };
-  setTimeout(job, 2 ** count * second);
+  return new Promise(() => setTimeout(job, 2 ** count * second));
 }
 
-retryWithExponentialBackoff(
-  () => false,
-  3,
-  (e) => console.log(e)
-);
+// (async () => {
+//   const resp = await retryWithExponentialBackoff(
+//     () => fetch("https://example.com"),
+//     5
+//   );
+//   console.log(resp);
+// })();
