@@ -1,4 +1,4 @@
-//　明示的にイテレータインタフェース のメソッドを呼んだり、間接的に呼んだりする
+//　■ 明示的にイテレータインタフェース のメソッドを呼んだり、間接的に呼んだりする
 console.log("======================");
 const iter = counterIter(3);
 const iterator = iter[Symbol.iterator]();
@@ -7,30 +7,52 @@ for (let result = iterator.next(); !result.done; result = iterator.next()) {
 }
 console.log("======================");
 
-// const iterator2 = iter[Symbol.iterator]();
-// console.log([...counterIter(3)]);
-
-// ジェネレータ関数によって生成されたオブジェクトがイテレータインタフェースを満たしていることを確認する
-const generator = counterGen();
-// console.log(generator );
-
-// return() や throw() がどのようなときに呼ばれるのか確認する
+// ■ ジェネレータ関数によって生成されたオブジェクトがイテレータインタフェースを満たしていることを確認する
 console.log("======================");
-const iterator3 = iter[Symbol.iterator]();
-for (let i of iterator3) {
-  if (i.next().value === 3) break;
+const generator = counterGen(3);
+console.log(typeof generator["next"] === "function"); // true
+console.log(typeof generator[Symbol.iterator] === "function"); // true
+console.log(generator[Symbol.iterator]() === generator); // true
+console.log(generator["next"]()); // { 1, done:false}
+for (const elem of generator) {
+  console.log(elem); // 2, 3
+}
+console.log(generator["next"]()); // { done:true}
+
+console.log("======================");
+
+// ■ return() や throw() がどのようなときに呼ばれるのか確認する
+console.log("======================");
+const iterator3 = counterIter(3);
+for (const i of iterator3) {
+  if (i === 1) break; // ounterIter: return: undefined
   console.log(i);
 }
-console.log(iterator3.next().value);
 console.log("======================");
 const iter2 = counterIter(3);
 const iterator2 = iter2[Symbol.iterator]();
-const result2 = iterator2.return();
-console.log(result2.value);
-console.log(result2.done);
+const result2 = iterator2.return(); // returnを直接実行
+console.log(result2.value); // -1
+console.log(result2.done); // true
 console.log("======================");
 
-// ジェネレータ関数の中身がどのタイミングで初めて実行されるか確認する
+// ■ ジェネレータ関数の中身がどのタイミングで初めて実行されるか確認する
+console.log("======================");
+const generator2 = counterGen(3);
+for (const elem of generator2) {
+  if (elem === 2) break; //counterGen: finally
+  console.log(elem);
+}
+console.log("======================");
+const generator3 = counterGen(3);
+for (const elem of generator3) {
+  if (elem === 1) {
+    generator3.throw("error"); // counterGen: catch: error
+    break;
+  }
+  console.log(elem);
+}
+console.log("======================");
 
 function counterIter(max) {
   console.log("counterIter");
@@ -51,7 +73,7 @@ function counterIter(max) {
     },
     return(value) {
       console.log("counterIter: return:", value);
-      return { value, done: true };
+      return { value: -1, done: true };
     },
     throw(e) {
       console.log("counterIter: throw:", e);

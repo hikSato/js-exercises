@@ -2,7 +2,6 @@ import fs from "fs";
 
 export function* walk(rootPath) {
   const entries = fs.readdirSync(rootPath, { withFileTypes: true });
-
   for (const entry of entries) {
     const fullPath = rootPath + "/" + entry.name;
     const isDirectory = entry.isDirectory();
@@ -10,13 +9,12 @@ export function* walk(rootPath) {
       path: fullPath,
       isDirectory: isDirectory,
     };
-
     if (isDirectory) {
       yield* walk(fullPath);
     }
   }
 }
 
-for (const elem of walk(".")) {
+for (const elem of walk("./ch12/ex06")) {
   console.log(elem);
 }
