@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <title>ex02</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body>
+    <button id="importButton">import</button>
+    <script type="module">
+      document
+        .getElementById("importButton")
+        .addEventListener("click", async () => {
+          const { displayMessage } = await import(
+            "http://localhost:3000/ch15.01-03/ex02/index.js"
+          );
+          displayMessage();
+        });
+    </script>
+  </body>
+</html>

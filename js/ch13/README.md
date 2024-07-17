@@ -456,7 +456,7 @@ function h3() {
     errX();
   }).catch((e) => log(e.message));
 }
-
+h3();
 async function h4() {
   // NOTE: 2つの例外は両方 catch できるか？
   try {

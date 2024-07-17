@@ -1,0 +1,4 @@
+{
+  "name": "Taro",
+  "age": "<button onclick=window.alert('ウイルスに感染しました');>ddd</button>"
+}

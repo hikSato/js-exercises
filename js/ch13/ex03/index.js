@@ -12,10 +12,10 @@ export function readdir(path, options) {
   });
 }
 
-readdir("./ch13/ex03/A")
-  .then(() => readdir("./ch13/ex03/B"))
-  .then(() => readdir("./ch13/ex03/C"))
-  .then(() => console.log("COMPLETED"));
+// readdir("./ch13/ex03/A")
+//   .then(() => readdir("./ch13/ex03/B"))
+//   .then(() => readdir("./ch13/ex03/C"))
+//   .then(() => console.log("COMPLETED"));
 
 export function stat(path, options) {
   return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ export function stat(path, options) {
   });
 }
 
-stat("./ch13/ex03/A")
-  .then((e) => stat("./ch13/ex03/B"))
-  .then((e) => stat("./ch13/ex03/C"))
-  .then(() => console.log("COMPLETED"));
+// stat("./ch13/ex03/A")
+//   .then((e) => stat("./ch13/ex03/B"))
+//   .then((e) => stat("./ch13/ex03/C"))
+//   .then(() => console.log("COMPLETED"));

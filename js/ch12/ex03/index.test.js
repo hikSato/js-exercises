@@ -7,7 +7,6 @@ describe("ex03", () => {
     expect(c.next().value).toBe(1);
     expect(c.next().value).toBe(2);
     expect(c.throw().value).toBe(0);
-    expect(c.next().done).toBe(true);
-    expect(c.next().value).toBe(undefined);
+    expect(c.next().value).toBe(1);
   });
 });

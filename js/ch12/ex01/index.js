@@ -95,3 +95,6 @@ function* counterGen(max) {
     console.log("counterGen: finally");
   }
 }
+
+// Q 間接的にthrowを呼ぶ方法はある？
+// A 多分ないと思う。

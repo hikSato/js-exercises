@@ -28,26 +28,26 @@ import { join } from "node:path";
 //   });
 // }
 
-export function fetchFirstFileSize(path, callback) {
+export function fetchFirstFileSize(path) {
   return fsPromises
     .readdir(path)
     .then(
       (files) => {
         if (files.length === 0) {
-          callback(null, null);
+          Promise.resolve(null, null);
           return;
         }
         return fsPromises.stat(join(path, files[0]));
       },
       (err) => {
-        callback(err);
+        Promise.rejects(err);
         return;
       }
     )
     .then(
       (stats) => callback(null, stats.size),
       (err) => {
-        callback(err);
+        Promise.rejects(err);
         return;
       }
     );
@@ -83,13 +83,13 @@ export function fetchFirstFileSize(path, callback) {
 //   });
 // }
 
-export function fetchSumOfFileSizes(path, callback) {
+export function fetchSumOfFileSizes(path) {
   return fsPromises.readdir(path).then((files) => {
     let total = 0;
     const rest = [...files];
     function iter() {
       if (rest.length === 0) {
-        callback(null, total);
+        Promise.resolve(total);
         return;
       }
 
@@ -100,7 +100,7 @@ export function fetchSumOfFileSizes(path, callback) {
           return iter();
         },
         (err) => {
-          callback(err);
+          Promise.rejects(err);
           return;
         }
       );

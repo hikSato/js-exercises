@@ -34,3 +34,6 @@ export function fibonacci(n) {
 }
 
 console.log(fibonacci(20));
+
+// Q returnやthrowも含めた方がいい？
+// A return や throwもイテレータ関数を作るときは含めた方がいいかもしれない。

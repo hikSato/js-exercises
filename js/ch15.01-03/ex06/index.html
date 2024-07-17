@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <title>ex06</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 50%;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="color: red">あなたのパソコンはトロイの木馬に感染しました。</h1>
+    <p>今すぐ八万園を払ってください。</p>
+    <table>
+      <tbody>
+        <tr>
+          <th>ご登録日</th>
+          <td id="date"></td>
+        </tr>
+        <tr>
+          <th>ユーザーエージェント</th>
+          <td id="agent"></td>
+        </tr>
+        <tr>
+          <th>オンライン状態</th>
+          <td id="status"></td>
+        </tr>
+        <tr>
+          <th>言語</th>
+          <td id="language"></td>
+        </tr>
+        <!-- <tr>
+          <th >画面の解像度</td>
+          <td id="resolution"></td>
+        </tr>
+        <tr>
+          <th >画面のピクセル密度</td>
+          <td id="pixel"></td>
+        </tr>
+        <tr>
+          <th >Cookieの有効性</td>
+          <td id="cookie"></td>
+        </tr>
+        <tr>
+          <th >JavaScriptの有効性</td>
+          <td id="jsEnabled"></td>
+        </tr> -->
+        <tr>
+          <th>現在のURL</th>
+          <td id="url"></td>
+        </tr>
+      </tbody>
+    </table>
+    <button onclick="window.alert('ボタンを押したらアウトです')">
+      今すぐ振り込む
+    </button>
+    <script type="module" src="index.js"></script>
+  </body>
+</html>

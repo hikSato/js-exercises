@@ -11,3 +11,6 @@ jQuery.DeferredとはjQueryのバージョン1.5から導入された、非同�
 - 一連の非同期処理を関数化して再利用しやすくできる
 
 非同期の処理それぞれに Promise と呼ばれるオブジェクトを割り当て、そのオブジェクトの状態を伝播させていくことで処理を進めていく。
+
+- jQuery Deferred　3.x以降では標準のPromiseを使うことが推奨されている。
+- Deferedの中のPromiseとDeferedのPromiseの関係ではなくES6との関係性。
