@@ -1,4 +1,4 @@
-class IgnoreAccentPattern {
+export class IgnoreAccentPattern {
   constructor(pattern) {
     this.pattern = pattern;
   }
@@ -18,6 +18,9 @@ class IgnoreAccentPattern {
   }
 
   get regex() {
+    if (typeof this.pattern === "string") {
+      return new RegExp(this.patternString);
+    }
     return new RegExp(this.patternString, "g");
   }
 
@@ -35,5 +38,3 @@ class IgnoreAccentPattern {
     return normalizedStr.search(this.regex);
   }
 }
-
-export { IgnoreAccentPattern };

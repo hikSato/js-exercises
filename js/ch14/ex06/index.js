@@ -1,25 +1,22 @@
-export function createLoggingProxy(target) {
+export function loggingProxy(target) {
   const callHistory = [];
 
   const handler = {
-    get(target, propKey, receiver) {
-      const originalMethod = target[propKey];
+    get(target, property) {
+      const original = target[property];
 
-      if (typeof originalMethod !== "function") {
-        return Reflect.get(target, propKey, receiver);
+      if (typeof original === "function") {
+        return function (...args) {
+          callHistory.push({
+            timestamp: new Date(),
+            methodName: property,
+            args: args,
+          });
+          return original.apply(this, args);
+        };
       }
 
-      return function (...args) {
-        const result = originalMethod.apply(this, args);
-
-        callHistory.push({
-          timestamp: new Date(),
-          methodName: propKey,
-          params: args,
-        });
-
-        return result;
-      };
+      return original;
     },
   };
 
