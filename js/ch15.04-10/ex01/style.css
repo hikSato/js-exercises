@@ -1,0 +1,135 @@
+/* 森を意識したスタイル */
+
+/* 
+   背景を緑にして、
+　 フォントを白、
+   アイテムを中央ぞろえにしている。
+   アイテムを縦方向に中央ぞろえに 
+   画面の高さを参照して中央にしている
+*/
+body {
+  background-color: #2e8b57; /* 深い森をイメージした緑色 */
+  font-family: "Arial", sans-serif;
+  color: #ffffff; /* 白い文字で清涼感を */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* 
+  TODOの入力フォームを中央に配置
+  フォームのアイテムを横方向に中央ぞろえに
+  フォームの下に余白を追加
+*/
+#new-todo-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* 
+　角に丸みをつける
+　緑いろのボーダーにして
+　背景色を白っぽい色に変更
+ */
+#new-todo {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #556b2f;
+  border-radius: 5px;
+  width: 300px;
+  outline: none;
+  background-color: #f5fffa;
+}
+
+/* フォーカス時に薄緑色に */
+#new-todo:focus {
+  border-color: #8fbc8f;
+}
+
+/* 
+　ボタンのスタイル
+　ボタン緑、フォント白
+　角に丸み付け
+　フォントサイズ16px
+  padding変更
+*/
+button {
+  background-color: #6b8e23;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* ボタンホバー時に暗い緑に変更 */
+button:hover {
+  background-color: #556b2f;
+}
+
+/* 
+　　ToDoリスト全スタイル変更
+　　幅を350pxにする
+ */
+#todo-list {
+  list-style: none;
+  padding: 0;
+  width: 350px;
+}
+
+/* 
+　各ToDo項目のスタイル 
+*/
+li {
+  background-color: #8fbc8f;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #556b2f;
+}
+
+/* 
+　完了したToDoアイテムのスタイル
+　色をグレーに設定
+*/
+li.completed {
+  background-color: #a9a9a9;
+  text-decoration: line-through;
+}
+
+/* 
+　チェックボックス
+　チェックボックスとテキストの間に余白を追加
+*/
+.toggle {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+/*　
+　削除ボタンのスタイル
+　背景を透明に
+　色を赤っぽくする  
+*/
+.destroy {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: #8b0000;
+}
+
+/* ホバー時に色を濃く */
+.destroy:hover {
+  color: #a52a2a;
+}
