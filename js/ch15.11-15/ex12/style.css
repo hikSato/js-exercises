@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5dc; /* 薄い黄色の背景 */
+  color: #333;
+  text-align: center;
+  padding: 20px;
+}
+h1 {
+  color: #ffcc00; /* ピカチュウの黄色 */
+  margin-bottom: 20px;
+}
+#upload-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ffcc00; /* ピカチュウの黄色のボーダー */
+}
+#upload-form label {
+  color: #333;
+  margin-bottom: 5px;
+}
+#upload-form input,
+#upload-form button {
+  margin-bottom: 10px;
+  border: 2px solid #ffcc00; /* ピカチュウの黄色のボーダー */
+  border-radius: 8px;
+  padding: 10px;
+}
+#upload-form input[type="file"] {
+  border: 2px solid #ffcc00; /* ピカチュウの黄色のボーダー */
+}
+#upload-form button {
+  background-color: #ffcc00; /* ピカチュウの黄色 */
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+#upload-form button:hover {
+  background-color: #ffd700; /* 少し明るい黄色 */
+}
+#status {
+  margin-top: 20px;
+  color: #ff0000; /* 赤色の文字 */
+}

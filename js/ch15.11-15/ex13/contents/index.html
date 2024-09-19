@@ -10,27 +10,64 @@
         margin: auto;
         display: flex;
         flex-direction: column;
+        height: 80vh;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        overflow: hidden;
       }
       #message-container {
         flex: 1;
         overflow-y: auto;
-        border: 1px solid #ddd;
         padding: 10px;
-        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        display: flex;
+        flex-direction: column;
       }
       .message {
         margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 12px;
+        max-width: 70%;
+        display: inline-block;
+        clear: both;
+      }
+      .message.user {
+        background-color: #d1e7dd;
+        align-self: flex-end;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        text-align: right;
+      }
+      .message.ai {
+        background-color: #e2e3e5;
+        align-self: flex-start;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        text-align: left;
       }
       #input-container {
         display: flex;
-        align-items: center;
+        border-top: 1px solid #ddd;
+        padding: 10px;
       }
       #input {
         flex: 1;
         padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
       }
       #send-button {
         padding: 10px 20px;
+        margin-left: 10px;
+        border: none;
+        background-color: #007bff;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      #send-button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
       }
     </style>
   </head>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload to OneDrive</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Upload File to OneDrive</h1>
+    <form id="upload-form">
+      <label for="access-token">Access Token:</label>
+      <input
+        type="text"
+        id="access-token"
+        placeholder="Enter your access token"
+        required
+      />
+
+      <label for="file">Select File:</label>
+      <input type="file" id="file" required />
+
+      <button type="submit">Upload</button>
+    </form>
+    <div id="status"></div>
+
+    <script src="index.js"></script>
+  </body>
+</html>

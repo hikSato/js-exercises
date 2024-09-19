@@ -12,9 +12,10 @@ wss.on("connection", (ws) => {
     wss.clients.forEach((client) => {
       if (client.readyState === WebSocket.OPEN && client != ws) {
         setTimeout(() => {
-          client.send(message);
+          client.send(`Hello, ${message}`);
         }, waitTIme);
       }
     });
   });
 });
+console.log("listen: localhost:3003");

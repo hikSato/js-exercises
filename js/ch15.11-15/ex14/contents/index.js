@@ -4,6 +4,7 @@ const button = document.querySelector("#send-button");
 const messageContainer = document.getElementById("message-container");
 button.addEventListener("click", (e) => {
   e.preventDefault();
+  button.disabled = true;
   getMessageFromServer();
 });
 async function getMessageFromServer() {
@@ -16,19 +17,21 @@ async function getMessageFromServer() {
   const eventSource = new EventSource("http://localhost:3000/message");
 
   eventSource.onmessage = (event) => {
-    messageElement.textContent = `Received message: ${event.data}`;
+    const item = document.createElement("div");
+    item.textContent = `Received message: ${event.data}`;
+    messageElement.appendChild(item);
   };
 
   eventSource.onerror = (event) => {
     console.error("EventSource error:", event);
-    messageElement.textContent = "Error receiving messages.";
+    const item = document.createElement("div");
+    item.textContent = "Error receiving messages.";
+    messageElement.appendChild(item);
+    button.disabled = false;
+    eventSource.close();
   };
 
   eventSource.onopen = () => {
     console.log("Connection opened.");
   };
-
-  eventSource.addEventListener("message", () => {
-    eventSource.close();
-  });
 }

@@ -46,7 +46,7 @@ function cspMiddleware(_url, req, res) {
   // TODO: CSP ヘッダを設定する
   res.setHeader(
     "Content-Security-Policy",
-    "script-src 'self' 'sha256-J2Xz+dXmrGUhQ3puvqqL93U8eWM+qjCj21C4lWJRums='"
+    "script-src 'sha256-ZGKMbT3NegX077yZeKmChVXljdKkjnessl0/j4RVvtA=' 'sha256-J2Xz+dXmrGUhQ3puvqqL93U8eWM+qjCj21C4lWJRums=';"
   );
   return true;
 }

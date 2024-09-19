@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <title>Sample</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <script type="module" src="./index.js"></script>
+    <style>
+      #new-todo-form {
+        margin-bottom: 20px;
+      }
+      #list-container {
+        display: flex;
+        justify-content: space-between;
+      }
+      .list-box {
+        width: 45%;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      h2 {
+        margin: 0 0 10px 0;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="new-todo-form">
+      <input type="text" id="new-todo" placeholder="message" />
+      <button type="submit">Send</button>
+    </form>
+    <form id="new-todo-form2">
+      <input type="text" id="new-todo2" placeholder="message" />
+      <button type="submit">Send</button>
+    </form>
+
+    <div id="list-container">
+      <div class="list-box">
+        <h2>リクエスト</h2>
+        <ul id="send-list"></ul>
+      </div>
+      <div class="list-box">
+        <h2>レスポンス</h2>
+        <ul id="response-list"></ul>
+      </div>
+    </div>
+  </body>
+</html>
