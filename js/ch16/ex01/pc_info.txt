@@ -1,0 +1,62 @@
+デバイス名	A080842900
+完全なデバイス名	A080842900.rfg.rfgad.ricoh.com
+プロセッサ	12th Gen Intel(R) Core(TM) i5-1245U   1.60 GHz
+実装 RAM	16.0 GB (15.7 GB 使用可能)
+デバイス ID	96B4F79F-029F-4CF1-98BC-63EF2D5C3EB4
+プロダクト ID	00330-80000-00000-AA934
+システムの種類	64 ビット オペレーティング システム、x64 ベース プロセッサ
+ペンとタッチ	このディスプレイでは、ペン入力とタッチ入力は利用できません
+
+コアの数 10
+Performance-coresの数2
+Efficient-coresの数8
+スレッド総数 12
+ターボ・ブースト利用時の最大周波数 4.40 GHz
+Performance-core最大ターボ・フリークエンシー 4.40 GHz
+Efficient-core のターボ・ブースト利用時の最大フリークエンシー 3.30 GHz
+キャッシュ 12 MB Intel® Smart Cache
+プロセッサーのベースパワー 15 W
+最大ターボパワー 55 W
+最小保証電力12 W
+
+https://www.intel.co.jp/content/www/jp/ja/products/sku/226260/intel-core-i51245u-processor-12m-cache-up-to-4-40-ghz/specifications.html
+
+
+# 回答
+お使いのCPUは、**2つのPerformanceコア**と**8つのEfficientコア**を持つ構成のようですね。この構成では、以下のようにスレッド数を最適化することが考えられます。
+
+### 1. **性能コア（Performance-cores）**
+   - Performanceコアは高負荷のタスクに最適です。特に、**CPUバウンド**のタスク（計算処理が多いもの）を処理する際には、これらのコアが有効です。
+   - これらのコアはハイパースレッディングに対応している場合が多く、1コアあたり2つのスレッドを処理できます。つまり、2つのPerformanceコアで**最大4つのスレッド**を効率的に処理可能です。
+
+### 2. **効率コア（Efficient-cores）**
+   - Efficientコアは軽いタスクや並列処理に優れています。**I/Oバウンド**なタスク（ネットワークやディスクI/Oを待つ時間が長いタスク）に多くのスレッドを割り当てる場合、これらのコアが役立ちます。
+   - Efficientコアは基本的にスレッド数が1:1なので、**8つのスレッド**を処理できます。
+
+### 最適なスレッド数の考え方
+- **CPUバウンドなタスク**では、Performanceコアを優先的に使用し、4スレッド（Performanceコアの最大処理数）が効率的です。
+- **I/Oバウンドなタスク**では、すべてのEfficientコアを活用し、8スレッドまでを割り当てることができます。
+- **混合負荷**の場合、10コア（2 Performanceコア＋8 Efficientコア）を合わせて使用することで、最大10スレッドを動かすことができますが、Performanceコアには負荷の大きいタスクを、Efficientコアには軽めの並列タスクを割り当てるように調整するとよいでしょう。
+
+### 一般的な指針:
+- **10〜12スレッド**を上限に設定すると、ほぼ全てのコアを効率的に利用できます。
+- アプリケーションの種類やタスクの性質に応じて、スレッド数を調整するのが最適です。
+
+パフォーマンスを最適化するには、ベンチマークを行って、コアやタスクの特性に応じたスレッド数を動的に調整するのがベストです。
+
+# 実行結果
+$ node mFib.js 45 12
+Worker 4 execution time: 152.25ms
+Worker 8 execution time: 177.694ms
+Worker 2 execution time: 237.542ms
+Worker 5 execution time: 376.658ms
+Worker 0 execution time: 485.503ms
+Worker 7 execution time: 648.838ms
+Worker 11 execution time: 1.076s
+Worker 3 execution time: 1.541s
+Worker 10 execution time: 2.331s
+Worker 9 execution time: 3.388s
+Worker 1 execution time: 5.232s
+Worker 6 execution time: 8.332s
+Total execution time: 8.339s
+Fibonacci number: 1836311902
