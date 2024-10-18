@@ -1,26 +1,29 @@
-const threads = require("worker_threads");
+import threads from "worker_threads";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+
+let num = 0;
 
 if (threads.isMainThread) {
-  let sharedBuffer = new SharedArrayBuffer(4);
-  let sharedArray = new Int32Array(sharedBuffer);
-  let worker = new threads.Worker(__filename, { workerData: sharedArray });
+  let worker = new threads.Worker(__filename);
 
   worker.on("online", () => {
     for (let i = 0; i < 10_000_000; i++) {
-      Atomics.add(sharedArray, 0, 1);
+      num++;
     }
 
     worker.on("message", (message) => {
-      // 両方のスレッドが終了したら、スレッドセーフな関数を使って
-      // 共有配列を読み込み、期待通りの20,000,000という値になって
-      // いることを確認する。
-      console.log(Atomics.load(sharedArray, 0));
+      if (message === "increment") {
+        num++;
+      } else if (message === "done") {
+        console.log(num);
+      }
     });
   });
 } else {
-  let sharedArray = threads.workerData;
   for (let i = 0; i < 10_000_000; i++) {
-    Atomics.add(sharedArray, 0, 1);
+    threads.parentPort.postMessage("increment");
   }
   threads.parentPort.postMessage("done");
 }

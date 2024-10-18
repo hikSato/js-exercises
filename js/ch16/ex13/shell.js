@@ -69,6 +69,8 @@ async function runcmd(cmd, stdin = null, stdout = null) {
       {
         // FIXME: ここを実装してね (2行程度)
         // HINT: cmd.file のストリームを createWriteStream で作成し runcmd を再帰的に呼び出す
+        const fileStream = fs.createWriteStream(cmd.file); // 出力先ファイルストリーム作成
+        await runcmd(cmd.cmd, stdin, fileStream); // 再帰的にコマンドを実行
       }
       break;
 
@@ -76,6 +78,8 @@ async function runcmd(cmd, stdin = null, stdout = null) {
       {
         // FIXME: ここを実装してね (2行程度)
         // HINT: cmd.file のストリームを createReadStream で作成し runcmd を再帰的に呼び出す
+        const fileStream = fs.createReadStream(cmd.file); // 入力元ファイルストリーム作成
+        await runcmd(cmd.cmd, fileStream, stdout); // 再帰的にコマンドを実行
       }
       break;
 
@@ -84,6 +88,11 @@ async function runcmd(cmd, stdin = null, stdout = null) {
         // FIXME: ここを実装してね (4行程度)
         // HINT: cmd.left と cmd.right に対して runcmd を再帰的に呼び出し Promise.all で待つ
         // HINT: left と right を繋ぐには new PassThrought() で作成したストリームを使用する
+        const passThrough = new PassThrough(); // left と right を繋ぐストリーム
+        await Promise.all([
+          runcmd(cmd.left, stdin, passThrough), // 左側のコマンド実行
+          runcmd(cmd.right, passThrough, stdout), // 右側のコマンド実行
+        ]);
       }
       break;
 

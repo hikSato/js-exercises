@@ -1,21 +1,27 @@
-#!/usr/bin/env node
-
-import axios from "axios";
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
 
-const GITHUB_TOKEN = "";
+const GITHUB_TOKEN ="";
 const OWNER = "";
 const REPO = "";
 
-const api = axios.create({
-  baseURL: "https://api.github.com",
-  headers: {
-    Authorization: `Bearer ${GITHUB_TOKEN}`,
-    "User-Agent": "github-issues-cli",
-    Accept: "application/vnd.github.v3+json",
-  },
-});
+const apiFetch = async (endpoint, options = {}) => {
+  const response = await fetch(`https://api.github.com${endpoint}`, {
+    ...options,
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      "User-Agent": "github-issues-cli",
+      Accept: "application/vnd.github.v3+json",
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Error ${response.status}: ${errorData.message}`);
+  }
+
+  return response.json();
+};
 
 yargs(hideBin(process.argv))
   .command(
@@ -33,11 +39,14 @@ yargs(hideBin(process.argv))
     },
     async (argv) => {
       try {
-        const response = await api.post(`/repos/${OWNER}/${REPO}/issues`, {
-          title: argv.title,
-          body: argv.body || "",
+        const response = await apiFetch(`/repos/${OWNER}/${REPO}/issues`, {
+          method: "POST",
+          body: JSON.stringify({
+            title: argv.title,
+            body: argv.body || "",
+          }),
         });
-        console.log("Issue created:", response.data.html_url);
+        console.log("Issue created:", response.html_url);
       } catch (error) {
         console.error("Error creating issue:", error.message);
       }
@@ -54,12 +63,10 @@ yargs(hideBin(process.argv))
     },
     async (argv) => {
       try {
-        const response = await api.patch(
-          `/repos/${OWNER}/${REPO}/issues/${argv.issue_number}`,
-          {
-            state: "closed",
-          }
-        );
+        await apiFetch(`/repos/${OWNER}/${REPO}/issues/${argv.issue_number}`, {
+          method: "PATCH",
+          body: JSON.stringify({ state: "closed" }),
+        });
         console.log(`Issue #${argv.issue_number} closed.`);
       } catch (error) {
         console.error("Error closing issue:", error.message);
@@ -68,13 +75,13 @@ yargs(hideBin(process.argv))
   )
   .command("list", "List all open issues", async () => {
     try {
-      const response = await api.get(`/repos/${OWNER}/${REPO}/issues`, {
+      const response = await apiFetch(`/repos/${OWNER}/${REPO}/issues`, {
         params: { state: "open" },
       });
-      if (response.data.length === 0) {
+      if (response.length === 0) {
         console.log("No open issues.");
       } else {
-        response.data.forEach((issue) => {
+        response.forEach((issue) => {
           console.log(`#${issue.number}: ${issue.title}`);
         });
       }
@@ -90,10 +97,11 @@ yargs(hideBin(process.argv))
   })
   .middleware((argv) => {
     if (argv.verbose) {
-      api.interceptors.request.use((config) => {
-        console.log("Request:", config);
-        return config;
-      });
+      const originalFetch = global.fetch;
+      global.fetch = async (...args) => {
+        console.log("Request:", args);
+        return originalFetch(...args);
+      };
     }
   })
   .help("h")
